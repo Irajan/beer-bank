@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 import * as beerService from "../../services/beer";
 
 function BeerInfiniteList() {
@@ -25,21 +26,26 @@ function BeerInfiniteList() {
 
   return (
     <div>
-      <div>
-        <h3>The Beer Bank</h3>
-        <p>Find Your favorite beer here</p>
-        <input type="search" />
+      <div className="header">
+        <h3 className="header__heading">The Beer Bank</h3>
+        <p className="header__description">Find Your favorite beer here</p>
+        <input className="header__input" type="search" />
       </div>
 
       {isLoading ? (
         <h1>Loading ...</h1>
       ) : (
-        <div>
+        <div className="container">
           {beers.map((beer) => (
-            <div key={beer.id}>
-              <h1>{beer.name}</h1>
+            <div key={beer.id} className="card">
+              <Link to={`/beers/${beer.id}`}>
+                <h1 className="card__heading">{beer.name}</h1>
+              </Link>
+              <div
+                className="card__img-container"
+                style={{ backgroundImage: `url(${beer.image_url})` }}
+              />
               <p>{beer.tagline}</p>
-              <img src={beer.image_url} alt={beer.name} />
             </div>
           ))}
         </div>
