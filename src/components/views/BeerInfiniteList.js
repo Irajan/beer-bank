@@ -1,45 +1,46 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import * as beerService from "../../services/beer";
+import { Link } from "react-router-dom";
+import fetchBeers from "../../actions/beers";
+
+// --> action
+//        --->  action
+//        --- > action
 
 function BeerInfiniteList() {
-  const [beers, setBeers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const beers = useSelector((store) => store);
+
   useEffect(() => {
-    async function fetchBeers() {
-      try {
-        setIsLoading(true);
-        const data = await beerService.fetchBeers();
-
-        setBeers(data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchBeers();
-  }, []);
+    dispatch(fetchBeers);
+  }, [dispatch]);
 
   return (
     <div>
-      <div>
-        <h3>The Beer Bank</h3>
-        <p>Find Your favorite beer here</p>
-        <input type="search" />
+      <div className="header">
+        <h3 className="header__heading">The Beer Bank</h3>
+        <p className="header__description">Find Your favorite beer here</p>
+        <input className="header__input" type="search" />
       </div>
 
       {isLoading ? (
         <h1>Loading ...</h1>
       ) : (
-        <div>
+        <div className="container">
           {beers.map((beer) => (
-            <div key={beer.id}>
-              <h1>{beer.name}</h1>
+            <div key={beer.id} className="card">
+              <Link to={`/beers/${beer.id}`}>
+                <h1 className="card__heading">{beer.name}</h1>
+              </Link>
+              <div
+                className="card__img-container"
+                style={{ backgroundImage: `url(${beer.image_url})` }}
+              />
               <p>{beer.tagline}</p>
-              <img src={beer.image_url} alt={beer.name} />
             </div>
           ))}
         </div>

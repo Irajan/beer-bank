@@ -3,6 +3,7 @@ const config = {
 
   endpoints: {
     beers: "v2/beers",
+    beer: "v2/beers/:id",
   },
 };
 
