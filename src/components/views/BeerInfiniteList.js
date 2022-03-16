@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import * as beerService from "../../services/beer";
+import fetchBeers from "../../actions/beers";
+
+// --> action
+//        --->  action
+//        --- > action
 
 function BeerInfiniteList() {
-  const [beers, setBeers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const beers = useSelector((store) => store);
+
   useEffect(() => {
-    async function fetchBeers() {
-      try {
-        setIsLoading(true);
-        const data = await beerService.fetchBeers();
-
-        setBeers(data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchBeers();
-  }, []);
+    dispatch(fetchBeers);
+  }, [dispatch]);
 
   return (
     <div>

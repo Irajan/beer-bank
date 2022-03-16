@@ -1,7 +1,4 @@
-import {
-  FETCH_BEERS_FULFILLED,
-  FETCH_BEERS_REJECTED,
-} from "../../actions/beers";
+import { FETCH_BEERS_FULFILLED, FETCH_BEERS_REJECTED } from "../actions/beers";
 
 function fetchBeers(state = [], action) {
   console.log(action);
