@@ -9,11 +9,12 @@ import fetchBeers from "../../actions/beers";
 //        --- > action
 
 function BeerInfiniteList() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
 
-  const beers = useSelector((store) => store);
+  const beers = useSelector((store) => store.beers);
+  const isLoading = useSelector((store) => store.isLoading);
+
+  dispatch({ type: "Anything", payload: "Nothing" });
 
   useEffect(() => {
     dispatch(fetchBeers);
