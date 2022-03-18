@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import fetchBeers from "../../actions/beers";
+import Loading from "../common/Loading";
 
 // --> action
 //        --->  action
