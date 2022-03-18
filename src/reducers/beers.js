@@ -15,14 +15,14 @@ export default function fetchBeers(state = INITIAL_STATE, action) {
       return { ...state, isLoading: true };
 
     case FETCH_BEERS_FULFILLED:
-      return { ...state, beers: action.payload, isLoading: false };
+      return {
+        ...state,
+        beers: [...state.beers, ...action.payload],
+        isLoading: false,
+      };
 
     case FETCH_BEERS_REJECTED:
       return { ...state, isLoading: false };
-
-    case "Anything":
-      console.log(action.payload);
-      return state;
 
     default:
       return state;
