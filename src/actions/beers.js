@@ -1,5 +1,7 @@
 import * as beerService from "../services/beer";
 
+export const RESET_BEERS = "RESET_BEERS";
+
 export const FETCH_BEERS = "FETCH_BEERS";
 export const FETCH_BEERS_PENDING = "FETCH_BEERS_PENDING";
 export const FETCH_BEERS_REJECTED = "FETCH_BEERS_REJECTED";
@@ -40,5 +42,11 @@ function fetchBeersRejected(err) {
 function fetchBeersPending() {
   return {
     type: FETCH_BEERS_PENDING,
+  };
+}
+
+export function resetBeers() {
+  return {
+    type: RESET_BEERS,
   };
 }
